@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+#include <SFML/Graphics.hpp>
+
 
 class TouristPoint
 {
@@ -57,6 +59,7 @@ public:
         color = newColor;
         shape.setFillColor(color);
     }
+    
 };
 
 
@@ -141,7 +144,7 @@ class TouristRouteManager
     sf::Sprite mapSprite;
     sf::Font font;
     sf::Color currentColor;
-
+    sf::Event event;
     TouristRoute currentRoute;
 
 
@@ -152,6 +155,7 @@ public:
 
     TouristRouteManager() : window(sf::VideoMode(1080, 720), "Tourist Route Manager"), insertionMode(true), lastIsDone(true)
     {
+ 
         if (!mapTexture.loadFromFile("C:/Users/neith/Desktop/Botw_MAP.jpeg"))
         {
             throw std::runtime_error("No se encontro la imagen");
@@ -169,35 +173,28 @@ public:
 
     void run()
     {
-        sf::Event event;
-        window.pollEvent(event);
-        if (event.type == sf::Event::Closed)
-            window.close();
-       
-        if (window.isOpen() && !lastIsDone)
+        
+        while (window.isOpen())
         {
             render();
-            run();
+            handleEvents();   
         }
-        if (window.isOpen() && lastIsDone)
+    }
+
+    void handleEvents()
+    {
+        while(window.pollEvent(event))
         {
-            
-            render();
-            if (event.type == sf::Event::MouseButtonPressed)
+            if (event.type == sf::Event::Closed)
+                window.close();
+            else if (event.type == sf::Event::MouseButtonPressed)
             {
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
                     handleMouseClick(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
                 }
             }
-            run();
-        }
-    }
-
-    void handleEvents()
-    {
-
-       
+        } 
         
 
     }
@@ -259,6 +256,9 @@ public:
 
     void render()
     {
+        
+
+
         window.clear();
         window.draw(mapSprite);
         currentRoute.drawRoute(window);
