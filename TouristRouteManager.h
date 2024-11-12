@@ -3,15 +3,14 @@
 
 class TouristRouteManager
 {
-
     sf::RenderWindow window;
     sf::Texture mapTexture;
     sf::Sprite mapSprite;
+    sf::Sprite menu;
     sf::Font font;
     sf::Color currentColor;
     sf::Event event;
     TouristPointList currentRoute;
-
     bool insertionMode;
     bool lastIsDone;
 
@@ -23,5 +22,4 @@ public:
     void handleEvents();
     void handleMouseClick(const sf::Vector2f& clickPos);
     void render();
-
 };

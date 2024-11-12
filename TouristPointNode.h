@@ -1,7 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "iostream"
-#include "string"
+#include "RoundedCornersRectangle.h"
 
 class TouristPointNode
 {
@@ -9,7 +7,6 @@ class TouristPointNode
     std::string name;
     sf::Vector2f position;
     sf::CircleShape shape;
-
     TouristPointNode* next;
     TouristPointNode* prev;
 

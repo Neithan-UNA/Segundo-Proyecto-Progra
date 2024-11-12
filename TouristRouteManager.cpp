@@ -2,14 +2,17 @@
 
 TouristRouteManager::TouristRouteManager() : window(sf::VideoMode(1080, 720), "Tourist Route Manager"), insertionMode(true), lastIsDone(true)
 {
-    if (!mapTexture.loadFromFile("C:/Users/neith/Desktop/Botw_MAP.jpeg"))
+    if (!mapTexture.loadFromFile("Resources/Botw_Map.png"))
     {
         throw std::runtime_error("No se encontro la imagen");
     }
-    if (!font.loadFromFile("C:/Windows/Fonts/arial.ttf"))
+    if (!font.loadFromFile("Resources/ComicSans.ttf"))
     {
         throw std::runtime_error("No se encontro el formato de texto");
     }
+    //menu.setTexture(getRoundedCornerRectangle()->getTexture());
+    //menu.setPosition(float(window.getSize().x) * 0.7, 0);
+    //menu.setScale(0.1, 0.1);
 
     mapSprite.setTexture(mapTexture);
     mapSprite.setScale(float(window.getSize().x) / float(mapTexture.getSize().x), float(window.getSize().y) / float(mapTexture.getSize().y));
@@ -25,7 +28,6 @@ void TouristRouteManager::run()
         handleEvents();
     }
 }
-
 void TouristRouteManager::handleEvents()
 {
     while (window.pollEvent(event))
@@ -37,8 +39,8 @@ void TouristRouteManager::handleEvents()
             if (event.mouseButton.button == sf::Mouse::Left)
             {
                 sf::FloatRect bounds = mapSprite.getGlobalBounds();
-                bounds.width -= 100;
-                if(bounds.contains(sf::Vector2f(event.mouseButton.x,event.mouseButton.y)))
+                bounds.width -= window.getSize().x * 0.3;
+                if (bounds.contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
                     handleMouseClick(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
                 }
@@ -46,7 +48,6 @@ void TouristRouteManager::handleEvents()
         }
     }
 }
-
 void TouristRouteManager::handleMouseClick(const sf::Vector2f& clickPos)
 {
     sf::Text userInputText;
@@ -55,12 +56,10 @@ void TouristRouteManager::handleMouseClick(const sf::Vector2f& clickPos)
     userInputText.setFillColor(sf::Color::White);
     userInputText.setPosition(0, 0);
     std::string pointName = " ";
-
     if (insertionMode && lastIsDone)
     {
         lastIsDone = false;
         sf::RenderWindow window2(sf::VideoMode(360, 240), "Tourist Route Manager");
-
         while (window2.isOpen())
         {
             sf::Event event;
@@ -81,17 +80,14 @@ void TouristRouteManager::handleMouseClick(const sf::Vector2f& clickPos)
                     else if (event.text.unicode == '\r')
                     {
                         window2.close();
-
                     }
                     else if (event.text.unicode < 128)
                     {
                         pointName += static_cast<char>(event.text.unicode);
                     }
-
                     userInputText.setString(pointName);
                 }
             }
-
             window2.clear(sf::Color::Black);
             window2.draw(userInputText);
             window2.display();
@@ -99,12 +95,12 @@ void TouristRouteManager::handleMouseClick(const sf::Vector2f& clickPos)
         currentRoute.addPoint(clickPos, pointName, lastIsDone);
     }
 }
-
 void TouristRouteManager::render()
 {
     window.clear();
     window.draw(mapSprite);
     currentRoute.drawRoute(window);
+    //window.draw(menu);
 
     window.display();
 }

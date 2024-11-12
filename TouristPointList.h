@@ -3,7 +3,6 @@
 
 class TouristPointList
 {
-
     std::string name;
     TouristPointNode* head;
     TouristPointNode* tail;
@@ -16,5 +15,4 @@ public:
     ~TouristPointList();
     void addPoint(const sf::Vector2f& pos, const std::string pointName, bool& isNewPointAdded);
     void drawRoute(sf::RenderWindow& window);
-
 };
