@@ -1,9 +1,9 @@
-#include "TouristRouteManager.h"
+#include "Application.h"
 
 int main()
 {
-    TouristRouteManager manager;
-    manager.run();
+    Application app;
+    app.run();
 
     return 0;
 }
