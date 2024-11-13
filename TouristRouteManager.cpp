@@ -23,11 +23,11 @@ TouristPointList *TouristRouteManager::getHead()
 	return head;
 }
 
-void TouristRouteManager::addRoute()
+void TouristRouteManager::addRoute() 
 {
 	TouristPointList* newList = new TouristPointList;
 
-	if (!head)
+	if (!head) 
 	{
 		head = newList;
 		currentRoute = newList;
@@ -35,22 +35,23 @@ void TouristRouteManager::addRoute()
 	else
 	{
 		TouristPointList* temp = head;
-
-		while(temp->getNext())
+		while (temp->getNext()) 
 		{
-			temp->getNext();
+			temp = temp->getNext();
 		}
 		temp->setNext(newList);
 		newList->setPrev(temp);
+		currentRoute = newList;
 	}
 }
 
 void TouristRouteManager::drawRoutes(sf::RenderWindow &window)
 {
 	TouristPointList* temp = head;
-	if(temp)
+	
+	while(temp)
 	{
-		currentRoute->drawRoute(window);
-		//temp = temp->getNext();
+		temp->drawRoute(window);
+		temp = temp->getNext();
 	}
 }

@@ -92,72 +92,15 @@ void FileManager::loadFromFile(TouristRouteManager& manager)
 			elements[5] = line;
 
 			
-				sf::Vector2f position(std::stof(elements[0]), std::stof(elements[1]));
-				sf::Color color(sf::Uint8(std::stoi(elements[2])), sf::Uint8(std::stoi(elements[3])), sf::Uint8(std::stoi(elements[4])));
-				std::string name = elements[5];
+			sf::Vector2f position(std::stof(elements[0]), std::stof(elements[1]));
+			sf::Color color(sf::Uint8(std::stoi(elements[2])), sf::Uint8(std::stoi(elements[3])), sf::Uint8(std::stoi(elements[4])));
+			std::string name = elements[5];
 
-				manager.addPoint(position, name, color);
+			manager.addPoint(position, name, color);
 			
 		}
-	
 		
 	}
 
 	file.close();
 }
-/*
-void FileManager::loadFromFile(TouristRouteManager& manager)
-{
-	std::ifstream file(saveFile);
-
-	if (!file) {
-		
-	}
-	else
-	{
-		std::string line;
-
-		while(std::getline(file,line))
-		{
-			if(line.find("Ruta"))
-			{
-				manager.addRoute();
-			}
-			else
-			{
-				sf::Color color;
-				int red = 0, green = 0, blue = 0;
-				std::string name;
-				sf::Vector2f position;
-
-				int pos = line.find(",");
-				position.x = stoi(line.substr(0, pos));
-				line.erase(0,pos+1);
-
-				pos = line.find(",");
-				position.y = stoi(line.substr(0, pos));
-				line.erase(0, pos + 1);
-
-				pos = line.find(",");
-				red = stoi(line.substr(0, pos));
-				line.erase(0, pos + 1);
-
-				pos = line.find(",");
-				green = stoi(line.substr(0, pos));
-				line.erase(0, pos + 1);
-
-				pos = line.find(",");
-				blue = stoi(line.substr(0, pos));
-				line.erase(0, pos + 1);
-
-				color = sf::Color(red, green, blue);
-				name = line;
-
-				manager.addPoint(position, name, color);
-
-			}
-		}
-	}
-
-	file.close();
-}*/

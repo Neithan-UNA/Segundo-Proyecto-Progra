@@ -17,6 +17,11 @@ Application::Application() : window(sf::VideoMode(1080, 720), "Tourist Route Man
     
     currentSprite.setTexture(currentTexture);
     currentSprite.setScale(float(window.getSize().x) / float(currentTexture.getSize().x), float(window.getSize().y) / float(currentTexture.getSize().y));
+    nextButton.setSize(sf::Vector2f(70.f, 40.f));
+
+    nextButton.setFillColor(sf::Color::Green);
+
+    nextButton.setPosition(600.f, 50.f);
 
     changeSettings();
 }
@@ -56,6 +61,10 @@ void Application::handleEvents()
                 if(settings.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x,event.mouseButton.y)) && !isSettingsOn)
                 {
                     changeSettings();
+                }
+                else if(nextButton.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) && !isSettingsOn)
+                {
+                    manager.addRoute();
                 }
                 else if (currentSprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) && !isSettingsOn)
                 {
@@ -142,7 +151,10 @@ void Application::render()
     window.clear();
 
     window.draw(currentSprite);
+    
     manager.drawRoutes(window);
+    
+    window.draw(nextButton);
     window.draw(settings);
     
 
@@ -153,4 +165,4 @@ void Application::render()
 //seleccionar puntos turisticos, resaltar ruta turistica cuando pasa
 //crear rutas turisticas
 //hacerle un cuadro de dialogo a la vara
-//hacer las settings y menu
+//hacer las settings y menu 

@@ -38,6 +38,16 @@ void TouristPointNode::setPrev(TouristPointNode* touristP)
 
 void TouristPointNode::draw(sf::RenderWindow& window)
 {
+    sf::Text pointText;
+    sf::Font font;
+    font.loadFromFile("Resources/ComicSans.ttf");
+    pointText.setFont(font);
+    pointText.setCharacterSize(24);
+    pointText.setFillColor(sf::Color::White);
+    pointText.setPosition(position);
+    pointText.setString(name);
+
+    window.draw(pointText);
     window.draw(shape);
 }
 

@@ -12,6 +12,7 @@ class Application
 
     sf::Texture settingsTexture;
     sf::Sprite settings;
+    sf::RectangleShape nextButton; 
 
     sf::Font font;
     sf::Event event;
