@@ -23,5 +23,8 @@ public:
 	void setPrevMap();
 	void setPrevLoading();
 	void setNextLoading();
+
+	void saveToFile;
+	void loadFromFile;
 	*/
 };

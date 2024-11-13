@@ -1,8 +1,12 @@
 #include "TouristPointList.h"
 
-TouristPointList::TouristPointList(const std::string routeName, const sf::Color color, const sf::Font fontRef) : name(routeName), head(nullptr), tail(nullptr), routeColor(color) {}
+TouristPointList::TouristPointList(const std::string routeName, const sf::Color color, const sf::Font fontRef) : name(routeName), head(nullptr), tail(nullptr), next(nullptr), prev(nullptr), routeColor(color) {}
 TouristPointList::TouristPointList() : name("No name"), head(nullptr), tail(nullptr), routeColor(sf::Color::Red) {}
 TouristPointList::~TouristPointList() {}
+TouristPointList* TouristPointList::getNext() 
+{
+    return next;
+}
 
 void TouristPointList::addPoint(const sf::Vector2f& pos, const std::string pointName)
 {
@@ -10,16 +14,20 @@ void TouristPointList::addPoint(const sf::Vector2f& pos, const std::string point
     if (!head)
     {
         head = point;
+        tail = point;
     }
     else
     {
-        TouristPointNode* auxiliar = head;
+        tail->setNext(point);
+        point->setPrev(tail);
+        tail = point;
+        /*TouristPointNode* auxiliar = head;
         while (auxiliar->getNext() != NULL)
         {
             auxiliar = auxiliar->getNext();
         }
         auxiliar->setNext(point);
-        point->setPrev(auxiliar);
+        point->setPrev(auxiliar);*/
     }
 
 }
