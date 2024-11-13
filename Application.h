@@ -4,13 +4,18 @@
 class Application
 {
     sf::RenderWindow window;
-    sf::Texture mapTexture;
-    sf::Sprite mapSprite;
+
+    sf::Texture currentTexture;
+    sf::Sprite currentSprite;
+
     sf::Sprite menu;
+
     sf::Font font;
     sf::Event event;
-    FileManager fileManager;
 
+    FileManager fileManager;
+    TouristRouteManager manager;
+    bool isLoadingScreenOn;
 public:
 
     Application();
@@ -18,4 +23,5 @@ public:
     void handleEvents();
     void handleMouseClick(const sf::Vector2f& clickPos);
     void render();
+
 };

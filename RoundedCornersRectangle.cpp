@@ -1,23 +1,23 @@
 #include "RoundedCornersRectangle.h"
 
 
-//float getLinearInterpolationValue(float startValue, float endValue, float ratio)
-//{
-//    return startValue + (endValue - startValue) * ratio;
-//}
-//
-//sf::Vector2f getLinearInterpolationPoint(sf::Vector2f startPoint, sf::Vector2f endPoint, float ratio)
-//{
-//    sf::Vector2f point(getLinearInterpolationValue(startPoint.x, endPoint.x, ratio), getLinearInterpolationValue(startPoint.y, endPoint.y, ratio));
-//    return point;
-//}
-//sf::Vector2f getCuadraticInterpolationPoint(sf::Vector2f startPoint, sf::Vector2f endPoint, float ratio)
-//{
-//    sf::Vector2f middlePoint((startPoint.x + endPoint.x) / 2 + 50, (startPoint.y + endPoint.y) / 2 + 50);
-//    return getLinearInterpolationPoint(getLinearInterpolationPoint(startPoint, middlePoint, (float)ratio / 100), getLinearInterpolationPoint(middlePoint, endPoint, (float)ratio / 100), (float)ratio / 100);
-//}
-//
-//
+float getLinearInterpolationValue(float startValue, float endValue, float ratio)
+{
+    return startValue + (endValue - startValue) * ratio;
+}
+
+sf::Vector2f getLinearInterpolationPoint(sf::Vector2f startPoint, sf::Vector2f endPoint, float ratio)
+{
+    sf::Vector2f point(getLinearInterpolationValue(startPoint.x, endPoint.x, ratio), getLinearInterpolationValue(startPoint.y, endPoint.y, ratio));
+    return point;
+}
+sf::Vector2f getCuadraticInterpolationPoint(sf::Vector2f startPoint, sf::Vector2f endPoint, float ratio)
+{
+    sf::Vector2f middlePoint((startPoint.x + endPoint.x) / 2 + 100, (startPoint.y + endPoint.y) / 2 + 100);
+    return getLinearInterpolationPoint(getLinearInterpolationPoint(startPoint, middlePoint, (float)ratio / 100), getLinearInterpolationPoint(middlePoint, endPoint, (float)ratio / 100), (float)ratio / 100);
+}
+
+
 //sf::RenderTexture* getRoundedCornerRectangle()
 //{
 //    sf::RenderTexture renderTexture;
