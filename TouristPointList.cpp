@@ -1,16 +1,20 @@
 #include "TouristPointList.h"
 
 TouristPointList::TouristPointList(const std::string routeName, const sf::Color color, const sf::Font fontRef) : name(routeName), head(nullptr), tail(nullptr), next(nullptr), prev(nullptr), routeColor(color) {}
-TouristPointList::TouristPointList() : name("No name"), head(nullptr), tail(nullptr), routeColor(sf::Color::Red) {}
+TouristPointList::TouristPointList() : name("No name"), head(nullptr), tail(nullptr), next(nullptr), prev(nullptr), routeColor(sf::Color::Red) {}
 TouristPointList::~TouristPointList() {}
-TouristPointList* TouristPointList::getNext() 
+TouristPointList *TouristPointList::getNext() 
 {
     return next;
 }
 
-void TouristPointList::addPoint(const sf::Vector2f& pos, const std::string pointName)
+TouristPointNode *TouristPointList::getHead()
 {
-    TouristPointNode* point = new TouristPointNode(pos, pointName, routeColor);
+    return head;
+}
+void TouristPointList::addPoint(const sf::Vector2f& pos, const std::string pointName, sf::Color color)
+{
+    TouristPointNode* point = new TouristPointNode(pos, pointName, color);
     if (!head)
     {
         head = point;
@@ -21,35 +25,18 @@ void TouristPointList::addPoint(const sf::Vector2f& pos, const std::string point
         tail->setNext(point);
         point->setPrev(tail);
         tail = point;
-        /*TouristPointNode* auxiliar = head;
-        while (auxiliar->getNext() != NULL)
-        {
-            auxiliar = auxiliar->getNext();
-        }
-        auxiliar->setNext(point);
-        point->setPrev(auxiliar);*/
+        
     }
 
 }
-/*
-
-float getLinearInterpolationValue(float startValue, float endValue, float ratio)
+void TouristPointList::setNext(TouristPointList* list)
 {
-    return startValue + (endValue - startValue) * ratio;
+    next = list;
 }
-
-sf::Vector2f getLinearInterpolationPoint(sf::Vector2f startPoint, sf::Vector2f endPoint, float ratio)
+void TouristPointList::setPrev(TouristPointList* list)
 {
-    sf::Vector2f point(getLinearInterpolationValue(startPoint.x, endPoint.x, ratio), getLinearInterpolationValue(startPoint.y, endPoint.y, ratio));
-    return point;
+    prev = list;
 }
-sf::Vector2f getCuadraticInterpolationPoint(sf::Vector2f startPoint, sf::Vector2f endPoint, float ratio)
-{
-    sf::Vector2f middlePoint((startPoint.x + endPoint.x) / 2 + 50, (startPoint.y + endPoint.y) / 2 + 50);
-    return getLinearInterpolationPoint(getLinearInterpolationPoint(startPoint, middlePoint, (float)ratio / 100), getLinearInterpolationPoint(middlePoint, endPoint, (float)ratio / 100), (float)ratio / 100);
-}
-
-*/
 
 void TouristPointList::drawRoute(sf::RenderWindow& window)
 {

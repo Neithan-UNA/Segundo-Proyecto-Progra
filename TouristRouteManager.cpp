@@ -6,9 +6,8 @@ TouristRouteManager::TouristRouteManager() : currentColor(sf::Color::Red), head(
 
 TouristRouteManager::~TouristRouteManager() {}
 
-void TouristRouteManager::addPoint(const sf::Vector2f& pos, const std::string pointName)
+void TouristRouteManager::addPoint(const sf::Vector2f& pos, const std::string pointName, sf::Color color)
 {
-	
 	if(!head)
 	{
 		TouristPointList *newList = new TouristPointList;
@@ -16,7 +15,34 @@ void TouristRouteManager::addPoint(const sf::Vector2f& pos, const std::string po
 		currentRoute = newList;
 	}
 
-	currentRoute->addPoint(pos, pointName);
+	currentRoute->addPoint(pos, pointName, color);
+}
+
+TouristPointList *TouristRouteManager::getHead()
+{
+	return head;
+}
+
+void TouristRouteManager::addRoute()
+{
+	TouristPointList* newList = new TouristPointList;
+
+	if (!head)
+	{
+		head = newList;
+		currentRoute = newList;
+	}
+	else
+	{
+		TouristPointList* temp = head;
+
+		while(temp->getNext())
+		{
+			temp->getNext();
+		}
+		temp->setNext(newList);
+		newList->setPrev(temp);
+	}
 }
 
 void TouristRouteManager::drawRoutes(sf::RenderWindow &window)

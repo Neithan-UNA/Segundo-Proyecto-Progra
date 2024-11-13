@@ -13,7 +13,8 @@ public:
 
     TouristRouteManager();
     ~TouristRouteManager();
-    void addPoint(const sf::Vector2f& pos, const std::string pointName);
+    void addPoint(const sf::Vector2f& pos, const std::string pointName, sf::Color color);
     void drawRoutes(sf::RenderWindow &window);
-    //void pushToNextRoute();
+    void addRoute();
+    TouristPointList *getHead();
 };

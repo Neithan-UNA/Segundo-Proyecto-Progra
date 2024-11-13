@@ -16,6 +16,16 @@ TouristPointNode* TouristPointNode::getNext()
     return next;
 }
 
+sf::Color TouristPointNode::getColor()
+{
+    return color;
+}
+
+std::string TouristPointNode::getName()
+{
+    return name;
+}
+
 void TouristPointNode::setNext(TouristPointNode* touristP)
 {
     next = touristP;

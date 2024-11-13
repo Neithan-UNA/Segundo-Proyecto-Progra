@@ -15,8 +15,9 @@ class Application
 
     sf::Font font;
     sf::Event event;
+    sf::Color color;
 
-    //FileManager fileManager;
+    FileManager fileManager;
     TouristRouteManager manager;
 
     bool isLoadingScreenOn;

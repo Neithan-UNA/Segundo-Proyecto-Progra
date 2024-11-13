@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <fstream>
 
 sf::RenderTexture* getRoundedCornerRectangle(const sf::Color fillColor);
 

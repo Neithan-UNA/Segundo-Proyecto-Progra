@@ -1,6 +1,6 @@
 #include "Application.h"
 
-Application::Application() : window(sf::VideoMode(1080, 720), "Tourist Route Manager"), isSettingsOn(true)
+Application::Application() : window(sf::VideoMode(1080, 720), "Tourist Route Manager"), isSettingsOn(true), color(sf::Color::Red)
 {
     if (!currentTexture.loadFromFile("Resources/Botw_Map.png"))
     {
@@ -23,18 +23,25 @@ Application::Application() : window(sf::VideoMode(1080, 720), "Tourist Route Man
 
 void Application::run()
 {
+   
+    fileManager.loadFromFile(manager);
+
     while (window.isOpen())
     {
         render();
         handleEvents();
     }
+
+    
 }
 void Application::handleEvents()
 {
     while (window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
+        {     
             window.close();
+        }
         else if (event.type == sf::Event::TextEntered)
         {
             if (event.text.unicode == 27)
@@ -126,8 +133,8 @@ void Application::handleMouseClick(const sf::Vector2f& clickPos)
     }
 
 
-    manager.addPoint(clickPos, pointName);
-
+    manager.addPoint(clickPos, pointName,color);
+    fileManager.saveToFile(manager);
 }
 
 void Application::render()

@@ -20,5 +20,7 @@ public:
     void draw(sf::RenderWindow& window);
     sf::Vector2f getPosition();
     void setColor(const sf::Color& newColor);
+    sf::Color getColor();
+    std::string getName();
 
 };

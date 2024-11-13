@@ -3,18 +3,21 @@
 	
 class FileManager
 {
+	std::string saveFile;
 	std::string maps[2];
-	int currentMap;
 	std::string loadingScreens[2];
-	int currentLoading;
 	std::string fonts[3];
-	int currentFont;
 	std::string songs[4];
+
+	int currentMap;
+	int currentLoading;
+	int currentFont;
 	int currentSong;
 
 public:
 
 	FileManager();
+	~FileManager();
 	/*
 	void setNextMap();
 	void setNextLoading();
@@ -24,7 +27,8 @@ public:
 	void setPrevLoading();
 	void setNextLoading();
 
-	void saveToFile;
-	void loadFromFile;
 	*/
+
+	void saveToFile(TouristRouteManager& manager);
+	void loadFromFile(TouristRouteManager &manager);
 };
